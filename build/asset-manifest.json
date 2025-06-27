@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "./static/css/main.559534d0.css",
+    "main.js": "./static/js/main.17e14806.js",
+    "static/media/reservation-background.jpg": "./static/media/reservation-background.f0e977b3f070f9433e10.jpg",
+    "static/media/hero-section-background-image.jpg": "./static/media/hero-section-background-image.847237bec72afc5d1396.jpg",
+    "static/media/reviewer-1.png": "./static/media/reviewer-1.fa31931dd68eba027c1e.png",
+    "static/media/services-2.jpg": "./static/media/services-2.971c64b340b9969679ea.jpg",
+    "static/media/services-5.jpg": "./static/media/services-5.9557185c351c538984dc.jpg",
+    "static/media/services-3.jpg": "./static/media/services-3.03a91a21e94b18fb2dff.jpg",
+    "static/media/services-1.jpg": "./static/media/services-1.1313361c3a6a3f1e909d.jpg",
+    "static/media/logo.svg": "./static/media/logo.276e43b1dbdaa7468ac8ed8624ad3619.svg",
+    "static/media/top-rated-destinations-south-luangwa.png": "./static/media/top-rated-destinations-south-luangwa.e5250c439b99f8c0f0d7.png",
+    "static/media/top-rated-destinations-kafue.png": "./static/media/top-rated-destinations-kafue.547916ca57f73b427e03.png",
+    "static/media/top-rated-destinations-victoria-falls.png": "./static/media/top-rated-destinations-victoria-falls.b56df599f346c34e8ab1.png",
+    "static/media/instagram.svg": "./static/media/instagram.001717500c1dcc16fbaad33d32717191.svg",
+    "static/media/whatsapp.svg": "./static/media/whatsapp.3a805111f2aec39498a5729206465139.svg",
+    "static/media/facebook.svg": "./static/media/facebook.6f28a60bbb33f5a5272da8b7a9d7e11c.svg",
+    "static/media/advantage-icon-1.svg": "./static/media/advantage-icon-1.327fab238abef58e804186a3dbfd5293.svg",
+    "static/media/advantage-icon-5.svg": "./static/media/advantage-icon-5.737ca63de9f01a79234f841a2328fdc9.svg",
+    "static/media/advantage-icon-3.svg": "./static/media/advantage-icon-3.303c05e0e60588ad90a283ccd1bd4cfc.svg",
+    "static/media/advantage-icon-4.svg": "./static/media/advantage-icon-4.6c73b2b0c1985bed8c88ebfd53ed68f3.svg",
+    "static/media/advantage-icon-2.svg": "./static/media/advantage-icon-2.e92a6eb638c660110586b5e95ccd2aca.svg",
+    "index.html": "./index.html",
+    "main.559534d0.css.map": "./static/css/main.559534d0.css.map",
+    "main.17e14806.js.map": "./static/js/main.17e14806.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.559534d0.css",
+    "static/js/main.17e14806.js"
+  ]
+}
