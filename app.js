@@ -8,20 +8,20 @@ require("dotenv").config();
 const { transporter } = require("./email");
 const { sanitizeString } = require("./sanitizeString");
 
-function getLocalIP() {
-    const interfaces = os.networkInterfaces();
-    for (let iface of Object.values(interfaces)) {
-      for (let alias of iface) {
-        if (alias.family === 'IPv4' && !alias.internal) {
-          return alias.address;
-        }
-      }
-    }
-    return 'No local IP found';
-}
+// function getLocalIP() {
+//     const interfaces = os.networkInterfaces();
+//     for (let iface of Object.values(interfaces)) {
+//       for (let alias of iface) {
+//         if (alias.family === 'IPv4' && !alias.internal) {
+//           return alias.address;
+//         }
+//       }
+//     }
+//     return 'No local IP found';
+// }
   
-const localIP = getLocalIP();
-console.log(`Server running at http://${localIP}:${port}`);
+// const localIP = getLocalIP();
+// console.log(`Server running at http://${localIP}:${port}`);
 
 const { logger } = require("./logger");
 
