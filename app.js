@@ -26,6 +26,7 @@ const path = require('path');
 
 const { logger } = require("./logger");
 
+app.use(express.static("build"));
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -170,6 +171,5 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static("build"));
 
 app.listen(port, () => logger.info("Listening to port " + port));
