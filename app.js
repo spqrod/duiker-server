@@ -7,6 +7,7 @@ const axios = require("axios");
 require("dotenv").config();
 const { transporter } = require("./email");
 const { sanitizeString } = require("./sanitizeString");
+const path = require('path');
 
 // function getLocalIP() {
 //     const interfaces = os.networkInterfaces();
@@ -148,6 +149,26 @@ app.post("/api/reservation", async (req, res) => {
         logger.info(error);
         res.status(500).json({res: "Error verifying reCAPTCHA"});
     }
+});
+
+// Canonicalization middleware
+app.use((req, res, next) => {
+  const host = req.hostname;
+  const protocol = req.protocol;
+  const path = req.path;
+
+  // Define the preferred canonical URL (non-www)
+  const canonicalHost = 'duikertravels.com';
+  const canonicalURL = `${protocol}://${canonicalHost}${path.endsWith('/') ? path : path + '/'}`;
+
+  // Redirect if host includes www or trailing slash is missing
+  if (host.startsWith('www.') || (path !== '/' && !path.endsWith('/'))) {
+    return res.redirect(301, canonicalURL);
+  }
+
+  // Set canonical link in HTML response
+  res.locals.canonical = canonicalURL;
+  next();
 });
 
 app.listen(port, () => logger.info("Listening to port " + port));
