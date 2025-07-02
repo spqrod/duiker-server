@@ -26,6 +26,27 @@ const path = require('path');
 
 const { logger } = require("./logger");
 
+// Canonicalization middleware
+app.use((req, res, next) => {
+    const host = req.hostname;
+    const protocol = req.protocol;
+    const path = req.path;
+  
+    // Define the preferred canonical URL (non-www)
+    const canonicalHost = 'duikertravels.com';
+    const canonicalURL = `${protocol}://${canonicalHost}${path.endsWith('/') ? path : path + '/'}`;
+  
+    // Redirect if host includes www or trailing slash is missing
+    if (host.startsWith('www.') || (path !== '/' && !path.endsWith('/'))) {
+      return res.redirect(301, canonicalURL);
+    }
+  
+    // Set canonical link in HTML response
+    res.locals.canonical = canonicalURL;
+    next();
+  });
+  
+
 app.use(express.static("build"));
 app.use(express.json());
 app.use(cors());
@@ -151,25 +172,6 @@ app.post("/api/reservation", async (req, res) => {
     }
 });
 
-// Canonicalization middleware
-app.use((req, res, next) => {
-  const host = req.hostname;
-  const protocol = req.protocol;
-  const path = req.path;
-
-  // Define the preferred canonical URL (non-www)
-  const canonicalHost = 'duikertravels.com';
-  const canonicalURL = `${protocol}://${canonicalHost}${path.endsWith('/') ? path : path + '/'}`;
-
-  // Redirect if host includes www or trailing slash is missing
-  if (host.startsWith('www.') || (path !== '/' && !path.endsWith('/'))) {
-    return res.redirect(301, canonicalURL);
-  }
-
-  // Set canonical link in HTML response
-  res.locals.canonical = canonicalURL;
-  next();
-});
 
 
 app.listen(port, () => logger.info("Listening to port " + port));
