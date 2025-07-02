@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "./static/css/main.559534d0.css",
-    "main.js": "./static/js/main.79f5a456.js",
+    "main.js": "./static/js/main.572ee086.js",
     "static/media/reservation-background.jpg": "./static/media/reservation-background.f0e977b3f070f9433e10.jpg",
     "static/media/hero-section-background-image.jpg": "./static/media/hero-section-background-image.847237bec72afc5d1396.jpg",
     "static/media/reviewer-1.png": "./static/media/reviewer-1.fa31931dd68eba027c1e.png",
@@ -23,10 +23,10 @@
     "static/media/advantage-icon-4.svg": "./static/media/advantage-icon-4.6c73b2b0c1985bed8c88ebfd53ed68f3.svg",
     "static/media/advantage-icon-2.svg": "./static/media/advantage-icon-2.e92a6eb638c660110586b5e95ccd2aca.svg",
     "main.559534d0.css.map": "./static/css/main.559534d0.css.map",
-    "main.79f5a456.js.map": "./static/js/main.79f5a456.js.map"
+    "main.572ee086.js.map": "./static/js/main.572ee086.js.map"
   },
   "entrypoints": [
     "static/css/main.559534d0.css",
-    "static/js/main.79f5a456.js"
+    "static/js/main.572ee086.js"
   ]
 }
