@@ -39,12 +39,12 @@ app.use((req, res, next) => {
 app.post("/api/contact", async (req, res) => {
 
     const { token } = req.body;
-    // const googleURL = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.CAPTCHA_SECRET_KEY}&response=${token}`;
+    const googleURL = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.CAPTCHA_SECRET_KEY}&response=${token}`;
 
     try {
-        // const response = await axios.post(googleURL);
-        // if (response.data.success) {
-        if (true) {
+        const response = await axios.post(googleURL);
+        if (response.data.success) {
+        // if (true) {
             logger.info(`Captcha in ${req.url} successful`);
 
             let { name, email, phone, formMessage } = req.body;
@@ -86,7 +86,7 @@ app.post("/api/contact", async (req, res) => {
     }
 });
 
-// POST contact email
+// POST reservation
 app.post("/api/reservation", async (req, res) => {
 
     const { token } = req.body;
