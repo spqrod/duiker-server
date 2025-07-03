@@ -39,51 +39,73 @@ app.use((req, res, next) => {
 app.post("/api/contact", async (req, res) => {
 
     const { token } = req.body;
-    const googleURL = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.CAPTCHA_SECRET_KEY}&response=${token}`;
+    const secretKey = process.env.CAPTCHA_SECRET_KEY;
+
+    // const googleURL = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.CAPTCHA_SECRET_KEY}&response=${token}`;
 
     try {
-        const response = await axios.post(googleURL);
-        if (response.data.success) {
-        // if (true) {
-            logger.info(`Captcha in ${req.url} successful`);
+    const response = await axios.post(
+        `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}`,
+        {},
+        { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+      );
 
-            let { name, email, phone, formMessage } = req.body;
-            name = sanitizeString(name);
-            email = sanitizeString(email);
-            phone = sanitizeString(phone);
-            formMessage = sanitizeString(formMessage);
+      if (response.data.success && response.data.score >= 0.5) { // Adjustable threshold
+        logger.info(`Captcha in /api/contact successful, score: ${response.data.score}`);
 
-            const emailBody = `<h2>New message from website</h2>
-            <p>Name: ${name}</p>
-            <p>Email: ${email}</p>
-            <p>Phone: ${phone}</p>
-            <p>Message: ${formMessage}</p>`;
-
-            const message = {
-                from: process.env.EMAIL_FROM,
-                to: process.env.EMAIL_TO,
-                subject: "New message from website",
-                html: emailBody
-            };
-
-            transporter.sendMail(message)
-                .then(() => {
-                    logger.info("Message sent successfully");
-                    res.json({success: true});
-                })
-                .catch(() => {
-                    logger.info("There was an error sending message");
-                    res.json({success: false});
-                });
-        } else {
-            logger.info("CAPTCHA failed");
-            res.json({res: "reCAPTCHA failed"});
-        }
-    } catch (error) {
-        logger.info("CAPTCHA error");
-        logger.info(error);
-        res.status(500).json({res: "Error verifying reCAPTCHA"});
+      } else {
+        logger.info(`CAPTCHA failed or low score: ${response.data.score}`);
+        res.json({ success: false, res: 'reCAPTCHA verification failed' });
+    } 
+}
+    catch (error) {
+      logger.info('CAPTCHA error', error);
+      res.status(500).json({ success: false, res: 'Error verifying reCAPTCHA' });
     }
+
+    // try {
+    //     const response = await axios.post(googleURL);
+    //     if (response.data.success) {
+    //     // if (true) {
+    //         logger.info(`Captcha in ${req.url} successful`);
+
+    //         let { name, email, phone, formMessage } = req.body;
+    //         name = sanitizeString(name);
+    //         email = sanitizeString(email);
+    //         phone = sanitizeString(phone);
+    //         formMessage = sanitizeString(formMessage);
+
+    //         const emailBody = `<h2>New message from website</h2>
+    //         <p>Name: ${name}</p>
+    //         <p>Email: ${email}</p>
+    //         <p>Phone: ${phone}</p>
+    //         <p>Message: ${formMessage}</p>`;
+
+    //         const message = {
+    //             from: process.env.EMAIL_FROM,
+    //             to: process.env.EMAIL_TO,
+    //             subject: "New message from website",
+    //             html: emailBody
+    //         };
+
+    //         transporter.sendMail(message)
+    //             .then(() => {
+    //                 logger.info("Message sent successfully");
+    //                 res.json({success: true});
+    //             })
+    //             .catch(() => {
+    //                 logger.info("There was an error sending message");
+    //                 res.json({success: false});
+    //             });
+    //     } else {
+    //         logger.info("CAPTCHA failed");
+    //         res.json({res: "reCAPTCHA failed"});
+    //     }
+    // } catch (error) {
+    //     logger.info("CAPTCHA error");
+    //     logger.info(error);
+    //     res.status(500).json({res: "Error verifying reCAPTCHA"});
+    // }
 });
 
 // POST reservation
