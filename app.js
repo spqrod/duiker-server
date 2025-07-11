@@ -48,7 +48,7 @@ app.post("/api/contact", async (req, res) => {
             { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
         );
 
-        if (response.data.success && response.data.score >= 0.5) { // Adjustable threshold
+        if (response.data.success && response.data.score >= 0.3) { // Adjustable threshold
             logger.info(`Captcha in /api/contact successful, score: ${response.data.score}`);
 
             let { name, email, phone, formMessage } = req.body;
@@ -105,7 +105,7 @@ app.post("/api/reservation", async (req, res) => {
             { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
         );
 
-        if (response.data.success && response.data.score >= 0.5) { // Adjustable threshold
+        if (response.data.success && response.data.score >= 0.3) { // Adjustable threshold
             logger.info(`Captcha in /api/contact successful, score: ${response.data.score}`);
 
             let { name, email, phone, specialRequests, payment, serviceType, pickUpDate, pickUpTime, pickUpLocation, dropOffLocation } = req.body;
