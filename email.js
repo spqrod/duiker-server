@@ -1,24 +1,19 @@
 const nodemailer = require("nodemailer");
 const { logger } = require("./logger");
-const DKIM = require("nodemailer-dkim");
-
-const dkim = new DKIM({
-    domainName: "duikertravels.com", 
-    keySelector: "k1", 
-    privateKey: process.env.DKIM_PRIVATE_KEY,
-    // Optional: cacheKey for performance
-    // cacheKey: (headers) => `${headers.from}:${headers.to}`
-});
 
 const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port: 465,
     secure: true,
+    dkim: {
+        domainName: "duikertravels.com",
+        keySelector: "k1",
+        privateKey: process.env.DKIM_PRIVATE_KEY,
+    },
     auth: {
         user: process.env.EMAIL_USERNAME,
         pass: process.env.EMAIL_PASSWORD
     },
-    dkim: dkim
 });
 
 transporter.verify(function (error, success) {
